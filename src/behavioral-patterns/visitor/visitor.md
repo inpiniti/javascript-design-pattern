@@ -1,57 +1,57 @@
-# Visitor Pattern
+# 비지터 패턴
 
-The Visitor pattern is a behavioral design pattern that allows you to separate an algorithm from the object structure on which it operates. This pattern is particularly useful when you need to perform operations on a set of objects with different types, and you want to avoid modifying the classes of those objects.
+비지터 패턴은 알고리즘을 그 알고리즘이 작동하는 객체 구조와 분리할 수 있게 해주는 행동 디자인 패턴입니다. 이 패턴은 서로 다른 유형의 객체 집합에 대해 작업을 수행해야 하고, 해당 객체의 클래스를 수정하지 않으려는 경우에 특히 유용합니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Visitor pattern is to enable adding new operations to existing object structures without modifying their classes. This is achieved by creating a visitor class that implements the operations, and the objects accept the visitor, allowing it to perform the operations on them.
+비지터 패턴의 주요 목적은 기존 객체 구조의 클래스를 수정하지 않고도 새로운 작업을 추가할 수 있게 하는 것입니다. 이는 작업을 구현하는 방문자 클래스를 만들고, 객체가 방문자를 받아들여 방문자가 객체에 대해 작업을 수행할 수 있도록 함으로써 달성됩니다.
 
-## Usage
+## 사용
 
-The Visitor pattern is commonly used in scenarios where you have a complex object structure, such as a composite structure, and you want to perform various operations on the elements of that structure. It promotes the open/closed principle, allowing you to extend functionality without altering existing code.
+비지터 패턴은 컴포지트 구조와 같은 복잡한 객체 구조가 있고, 해당 구조의 요소에 대해 다양한 작업을 수행하려는 시나리오에서 일반적으로 사용됩니다. 이는 개방/폐쇄 원칙을 촉진하여 기존 코드를 변경하지 않고도 기능을 확장할 수 있게 합니다.
 
-## Example Code
+## 예제 코드
 
 ```javascript
 // visitor.js
 
-class Visitor {
-    visitConcreteElementA(element) {
-        console.log(`Visiting ${element.name}`);
-    }
+class 방문자 {
+  구체요소A방문(요소) {
+    console.log(`${요소.이름} 방문 중`);
+  }
 
-    visitConcreteElementB(element) {
-        console.log(`Visiting ${element.name}`);
-    }
+  구체요소B방문(요소) {
+    console.log(`${요소.이름} 방문 중`);
+  }
 }
 
-class ConcreteElementA {
-    constructor(name) {
-        this.name = name;
-    }
+class 구체요소A {
+  constructor(이름) {
+    this.이름 = 이름;
+  }
 
-    accept(visitor) {
-        visitor.visitConcreteElementA(this);
-    }
+  수락(방문자) {
+    방문자.구체요소A방문(this);
+  }
 }
 
-class ConcreteElementB {
-    constructor(name) {
-        this.name = name;
-    }
+class 구체요소B {
+  constructor(이름) {
+    this.이름 = 이름;
+  }
 
-    accept(visitor) {
-        visitor.visitConcreteElementB(this);
-    }
+  수락(방문자) {
+    방문자.구체요소B방문(this);
+  }
 }
 
-// Usage
-const elements = [new ConcreteElementA('Element A'), new ConcreteElementB('Element B')];
-const visitor = new Visitor();
+// 사용 예시
+const 요소들 = [new 구체요소A('요소 A'), new 구체요소B('요소 B')];
+const 방문자 = new 방문자();
 
-elements.forEach(element => {
-    element.accept(visitor);
+요소들.forEach((요소) => {
+  요소.수락(방문자);
 });
 ```
 
-In this example, the `Visitor` class defines operations for different types of elements. Each concrete element class implements an `accept` method that takes a visitor as an argument, allowing the visitor to perform its operation on the element.
+이 예제에서 `방문자` 클래스는 다양한 유형의 요소에 대한 작업을 정의합니다. 각 구체 요소 클래스는 방문자를 인수로 받는 `수락` 메서드를 구현하여 방문자가 요소에 대해 작업을 수행할 수 있도록 합니다.

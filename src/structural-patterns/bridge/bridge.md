@@ -1,74 +1,74 @@
-# Bridge Pattern
+# 브릿지 패턴
 
-The Bridge pattern is a structural design pattern that separates an abstraction from its implementation, allowing the two to vary independently. This pattern is particularly useful when both the abstraction and the implementation can be extended without affecting each other.
+브릿지 패턴은 추상화를 구현으로부터 분리하여 두 개가 독립적으로 변할 수 있게 하는 구조적 디자인 패턴입니다. 이 패턴은 추상화와 구현이 서로에게 영향을 주지 않고 확장될 수 있을 때 특히 유용합니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Bridge pattern is to decouple an abstraction from its implementation so that both can evolve independently. This is achieved by creating a bridge interface that allows the abstraction to communicate with the implementation.
+브릿지 패턴의 주요 목적은 추상화를 구현으로부터 분리하여 둘 다 독립적으로 발전할 수 있도록 하는 것입니다. 이는 추상화가 구현과 통신할 수 있게 해주는 브릿지 인터페이스를 만들어 달성됩니다.
 
-## Usage
+## 사용
 
-The Bridge pattern is used when:
+브릿지 패턴은 다음과 같은 경우에 사용됩니다:
 
-- You want to avoid a permanent binding between an abstraction and its implementation.
-- Both the abstraction and the implementation can be extended independently.
-- You want to provide a way to change the implementation at runtime.
+- 추상화와 구현 사이의 영구적인 바인딩을 피하고자 할 때.
+- 추상화와 구현이 독립적으로 확장될 수 있어야 할 때.
+- 런타임에 구현을 변경할 수 있는 방법을 제공하고자 할 때.
 
-## Example Code
+## 예제 코드
 
 ```javascript
-// Implementor
-class DrawingAPI {
-    drawCircle(x, y, radius) {
-        throw new Error("This method should be overridden.");
-    }
+// 구현자
+class 그리기API {
+  원그리기(x, y, 반지름) {
+    throw new Error('이 메서드는 재정의되어야 합니다.');
+  }
 }
 
-// Concrete Implementor
-class DrawingAPI1 extends DrawingAPI {
-    drawCircle(x, y, radius) {
-        console.log(`API1.circle at ${x},${y} radius ${radius}`);
-    }
+// 구체 구현자
+class 그리기API1 extends 그리기API {
+  원그리기(x, y, 반지름) {
+    console.log(`API1.원을 ${x},${y}에 반지름 ${반지름}으로 그립니다`);
+  }
 }
 
-// Concrete Implementor
-class DrawingAPI2 extends DrawingAPI {
-    drawCircle(x, y, radius) {
-        console.log(`API2.circle at ${x},${y} radius ${radius}`);
-    }
+// 구체 구현자
+class 그리기API2 extends 그리기API {
+  원그리기(x, y, 반지름) {
+    console.log(`API2.원을 ${x},${y}에 반지름 ${반지름}으로 그립니다`);
+  }
 }
 
-// Abstraction
-class Shape {
-    constructor(drawingAPI) {
-        this.drawingAPI = drawingAPI;
-    }
+// 추상화
+class 도형 {
+  constructor(그리기API) {
+    this.그리기API = 그리기API;
+  }
 
-    draw() {
-        throw new Error("This method should be overridden.");
-    }
+  그리기() {
+    throw new Error('이 메서드는 재정의되어야 합니다.');
+  }
 }
 
-// Refined Abstraction
-class Circle extends Shape {
-    constructor(x, y, radius, drawingAPI) {
-        super(drawingAPI);
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-    }
+// 정제된 추상화
+class 원 extends 도형 {
+  constructor(x, y, 반지름, 그리기API) {
+    super(그리기API);
+    this.x = x;
+    this.y = y;
+    this.반지름 = 반지름;
+  }
 
-    draw() {
-        this.drawingAPI.drawCircle(this.x, this.y, this.radius);
-    }
+  그리기() {
+    this.그리기API.원그리기(this.x, this.y, this.반지름);
+  }
 }
 
-// Client code
-const circle1 = new Circle(5, 10, 2, new DrawingAPI1());
-const circle2 = new Circle(5, 10, 2, new DrawingAPI2());
+// 클라이언트 코드
+const 원1 = new 원(5, 10, 2, new 그리기API1());
+const 원2 = new 원(5, 10, 2, new 그리기API2());
 
-circle1.draw(); // API1.circle at 5,10 radius 2
-circle2.draw(); // API2.circle at 5,10 radius 2
+원1.그리기(); // API1.원을 5,10에 반지름 2으로 그립니다
+원2.그리기(); // API2.원을 5,10에 반지름 2으로 그립니다
 ```
 
-In this example, the `Shape` class serves as the abstraction, while `DrawingAPI` acts as the implementor. The `Circle` class is a refined abstraction that uses the `DrawingAPI` to perform its drawing operations. This allows for flexibility in choosing different drawing implementations without modifying the `Circle` class.
+이 예제에서 `도형` 클래스는 추상화 역할을 하며, `그리기API`는 구현자 역할을 합니다. `원` 클래스는 그리기 작업을 수행하기 위해 `그리기API`를 사용하는 정제된 추상화입니다. 이를 통해 `원` 클래스를 수정하지 않고도 다양한 그리기 구현을 선택할 수 있는 유연성을 제공합니다.

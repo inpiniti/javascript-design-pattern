@@ -1,44 +1,44 @@
-# Iterator Pattern
+# 이터레이터 패턴
 
-The Iterator pattern is a behavioral design pattern that provides a way to access the elements of a collection sequentially without exposing its underlying representation. This pattern is particularly useful when you want to traverse a collection of objects without needing to understand the details of how the collection is structured.
+이터레이터 패턴은 컬렉션의 기본 구조를 노출하지 않고 요소에 순차적으로 접근하는 방법을 제공하는 행동 디자인 패턴입니다. 이 패턴은 컬렉션이 구조화된 방식의 세부 사항을 이해할 필요 없이 객체 컬렉션을 순회하고자 할 때 특히 유용합니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Iterator pattern is to provide a standard way to traverse a collection of objects. It allows for the separation of the collection's internal structure from the way it is accessed, enabling different types of collections to be traversed in a uniform manner.
+이터레이터 패턴의 주요 목적은 객체 컬렉션을 순회하는 표준 방법을 제공하는 것입니다. 이는 컬렉션의 내부 구조와 접근 방식을 분리하여 다양한 유형의 컬렉션을 일관된 방식으로 순회할 수 있게 합니다.
 
-## Usage
+## 사용
 
-The Iterator pattern is commonly used in scenarios where you need to iterate over a collection of objects, such as lists, arrays, or any other data structure. It is particularly useful when the collection can change dynamically, and you want to provide a consistent way to access its elements.
+이터레이터 패턴은 리스트, 배열 또는 기타 데이터 구조와 같은 객체 컬렉션을 반복해야 하는 시나리오에서 일반적으로 사용됩니다. 특히 컬렉션이 동적으로 변경될 수 있고 요소에 접근하는 일관된 방법을 제공하고자 할 때 유용합니다.
 
-## Example Code
+## 예제 코드
 
-Here is a simple example of the Iterator pattern in JavaScript:
+다음은 자바스크립트에서 이터레이터 패턴의 간단한 예입니다:
 
 ```javascript
-class Iterator {
-    constructor(collection) {
-        this.collection = collection;
-        this.index = 0;
-    }
+class 반복자 {
+  constructor(컬렉션) {
+    this.컬렉션 = 컬렉션;
+    this.인덱스 = 0;
+  }
 
-    next() {
-        return this.index < this.collection.length ?
-            { value: this.collection[this.index++], done: false } :
-            { done: true };
-    }
+  다음() {
+    return this.인덱스 < this.컬렉션.length
+      ? { 값: this.컬렉션[this.인덱스++], 완료: false }
+      : { 완료: true };
+  }
 
-    hasNext() {
-        return this.index < this.collection.length;
-    }
+  다음있음() {
+    return this.인덱스 < this.컬렉션.length;
+  }
 }
 
-// Usage
-const collection = ['item1', 'item2', 'item3'];
-const iterator = new Iterator(collection);
+// 사용 예
+const 컬렉션 = ['항목1', '항목2', '항목3'];
+const 반복자객체 = new 반복자(컬렉션);
 
-while (iterator.hasNext()) {
-    console.log(iterator.next().value);
+while (반복자객체.다음있음()) {
+  console.log(반복자객체.다음().값);
 }
 ```
 
-In this example, the `Iterator` class allows you to traverse a collection of items. The `next` method returns the next item in the collection, while the `hasNext` method checks if there are more items to iterate over.
+이 예제에서 `반복자` 클래스는 항목 컬렉션을 순회할 수 있게 해줍니다. `다음` 메서드는 컬렉션의 다음 항목을 반환하고, `다음있음` 메서드는 순회할 항목이 더 있는지 확인합니다.

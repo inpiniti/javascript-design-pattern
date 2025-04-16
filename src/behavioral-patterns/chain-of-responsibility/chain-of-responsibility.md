@@ -1,54 +1,57 @@
-# Chain of Responsibility Pattern
+# 책임 연쇄 패턴
 
-## Purpose
-The Chain of Responsibility pattern is a behavioral design pattern that allows an object to send a request to a chain of potential handlers. Each handler decides either to process the request or to pass it to the next handler in the chain. This pattern promotes loose coupling by allowing multiple objects to handle a request without the sender needing to know which object will ultimately handle it.
+## 목적
 
-## Usage
-This pattern is particularly useful when you have multiple handlers that can process a request, and you want to decouple the sender from the receiver. It can be used in scenarios such as event handling systems, logging frameworks, and more.
+책임 연쇄 패턴은 요청을 잠재적 처리자 체인에 전달할 수 있게 해주는 행동 디자인 패턴입니다. 각 처리자는 요청을 처리하거나 체인의 다음 처리자에게 전달할지 결정합니다. 이 패턴은 발신자가 어떤 객체가 최종적으로 요청을 처리할지 알 필요 없이 여러 객체가 요청을 처리할 수 있게 함으로써 느슨한 결합을 촉진합니다.
 
-## Example Code
+## 사용
+
+이 패턴은 요청을 처리할 수 있는 여러 처리자가 있고 발신자와 수신자를 분리하고 싶을 때 특히 유용합니다. 이벤트 처리 시스템, 로깅 프레임워크 등의 시나리오에서 사용될 수 있습니다.
+
+## 예제 코드
+
 ```javascript
-// Handler class
-class Handler {
-    constructor(successor) {
-        this.successor = successor;
-    }
+// 처리자 클래스
+class 처리자 {
+  constructor(후임자) {
+    this.후임자 = 후임자;
+  }
 
-    handleRequest(request) {
-        if (this.successor) {
-            this.successor.handleRequest(request);
-        }
+  요청처리(요청) {
+    if (this.후임자) {
+      this.후임자.요청처리(요청);
     }
+  }
 }
 
-// Concrete handlers
-class ConcreteHandlerA extends Handler {
-    handleRequest(request) {
-        if (request === 'A') {
-            console.log('Handler A processed request A');
-        } else {
-            super.handleRequest(request);
-        }
+// 구체적 처리자들
+class 구체처리자A extends 처리자 {
+  요청처리(요청) {
+    if (요청 === 'A') {
+      console.log('처리자 A가 요청 A를 처리했습니다');
+    } else {
+      super.요청처리(요청);
     }
+  }
 }
 
-class ConcreteHandlerB extends Handler {
-    handleRequest(request) {
-        if (request === 'B') {
-            console.log('Handler B processed request B');
-        } else {
-            super.handleRequest(request);
-        }
+class 구체처리자B extends 처리자 {
+  요청처리(요청) {
+    if (요청 === 'B') {
+      console.log('처리자 B가 요청 B를 처리했습니다');
+    } else {
+      super.요청처리(요청);
     }
+  }
 }
 
-// Client code
-const handlerB = new ConcreteHandlerB(null);
-const handlerA = new ConcreteHandlerA(handlerB);
+// 클라이언트 코드
+const 처리자B = new 구체처리자B(null);
+const 처리자A = new 구체처리자A(처리자B);
 
-handlerA.handleRequest('A'); // Output: Handler A processed request A
-handlerA.handleRequest('B'); // Output: Handler B processed request B
-handlerA.handleRequest('C'); // No output, request not handled
+처리자A.요청처리('A'); // 출력: 처리자 A가 요청 A를 처리했습니다
+처리자A.요청처리('B'); // 출력: 처리자 B가 요청 B를 처리했습니다
+처리자A.요청처리('C'); // 출력 없음, 요청이 처리되지 않음
 ```
 
-This example demonstrates how requests can be processed by different handlers in a chain, allowing for flexible request handling.
+이 예제는 체인의 다른 처리자들이 어떻게 요청을 처리할 수 있는지 보여주며, 유연한 요청 처리를 가능하게 합니다.

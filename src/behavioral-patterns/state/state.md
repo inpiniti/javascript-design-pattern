@@ -1,61 +1,61 @@
-# State Pattern
+# 스테이트 패턴
 
-The State pattern is a behavioral design pattern that allows an object to alter its behavior when its internal state changes. This pattern is particularly useful when an object needs to exhibit different behaviors in different states, making the code more manageable and easier to understand.
+스테이트 패턴은 객체가 내부 상태가 변경될 때 그 행동을 변경할 수 있도록 하는 행동 디자인 패턴입니다. 이 패턴은 객체가 다른 상태에서 다른 행동을 보여야 할 때 특히 유용하며, 코드를 더 관리하기 쉽고 이해하기 쉽게 만듭니다.
 
-## Purpose
+## 목적
 
-The State pattern encapsulates state-specific behavior in separate classes, allowing the object to change its behavior dynamically based on its current state. This leads to cleaner code and adheres to the Single Responsibility Principle, as each state class is responsible for its own behavior.
+스테이트 패턴은 상태별 동작을 별도의 클래스로 캡슐화하여 객체가 현재 상태에 따라 동적으로 동작을 변경할 수 있게 합니다. 이는 더 깔끔한 코드로 이어지며 각 상태 클래스가 자신의 행동에 대해 책임을 지므로 단일 책임 원칙을 준수합니다.
 
-## Usage
+## 사용
 
-The State pattern is commonly used in scenarios where an object can be in multiple states, and its behavior changes based on its current state. Examples include:
+스테이트 패턴은 객체가 여러 상태를 가질 수 있고 현재 상태에 따라 행동이 변경되는 시나리오에서 일반적으로 사용됩니다. 예를 들면:
 
-- A media player that can be in states like Playing, Paused, or Stopped.
-- A document editor that can be in states like Editing, Read-Only, or Locked.
+- 재생, 일시 정지 또는 정지 상태일 수 있는 미디어 플레이어.
+- 편집, 읽기 전용 또는 잠금 상태일 수 있는 문서 편집기.
 
-## Example Code
+## 예제 코드
 
 ```javascript
 // state.js
 
-class State {
-    handle(context) {
-        throw new Error("This method should be overridden!");
-    }
+class 상태 {
+  처리(컨텍스트) {
+    throw new Error('이 메서드는 오버라이드 되어야 합니다!');
+  }
 }
 
-class ConcreteStateA extends State {
-    handle(context) {
-        console.log("Handling request in ConcreteStateA");
-        context.setState(new ConcreteStateB());
-    }
+class 구체상태A extends 상태 {
+  처리(컨텍스트) {
+    console.log('구체상태A에서 요청 처리 중');
+    컨텍스트.상태설정(new 구체상태B());
+  }
 }
 
-class ConcreteStateB extends State {
-    handle(context) {
-        console.log("Handling request in ConcreteStateB");
-        context.setState(new ConcreteStateA());
-    }
+class 구체상태B extends 상태 {
+  처리(컨텍스트) {
+    console.log('구체상태B에서 요청 처리 중');
+    컨텍스트.상태설정(new 구체상태A());
+  }
 }
 
-class Context {
-    constructor() {
-        this.state = new ConcreteStateA();
-    }
+class 컨텍스트 {
+  constructor() {
+    this.상태 = new 구체상태A();
+  }
 
-    setState(state) {
-        this.state = state;
-    }
+  상태설정(상태) {
+    this.상태 = 상태;
+  }
 
-    request() {
-        this.state.handle(this);
-    }
+  요청() {
+    this.상태.처리(this);
+  }
 }
 
-// Usage
-const context = new Context();
-context.request(); // Handling request in ConcreteStateA
-context.request(); // Handling request in ConcreteStateB
+// 사용 예시
+const 컨텍스트 = new 컨텍스트();
+컨텍스트.요청(); // 출력: 구체상태A에서 요청 처리 중
+컨텍스트.요청(); // 출력: 구체상태B에서 요청 처리 중
 ```
 
-In this example, the `Context` class maintains a reference to a `State` object and delegates state-specific behavior to it. The `ConcreteStateA` and `ConcreteStateB` classes implement the behavior for their respective states. The `request` method in the `Context` class triggers the state-specific behavior and transitions to the next state.
+이 예제에서 `컨텍스트` 클래스는 `상태` 객체에 대한 참조를 유지하고 상태별 동작을 해당 상태 객체에 위임합니다. `구체상태A`와 `구체상태B` 클래스는 각각의 상태에 대한 동작을 구현합니다. `컨텍스트` 클래스의 `요청` 메서드는 상태별 동작을 트리거하고 다음 상태로 전환합니다.

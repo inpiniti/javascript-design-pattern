@@ -1,64 +1,68 @@
-# Composite Pattern
+# 컴포지트 패턴
 
-## Purpose
-The Composite pattern is a structural design pattern that allows you to compose objects into tree structures to represent part-whole hierarchies. This pattern lets clients treat individual objects and compositions of objects uniformly.
+## 목적
 
-## Usage
-The Composite pattern is particularly useful when you want to represent a hierarchy of objects where both individual objects and compositions of objects should be treated the same way. It simplifies client code by allowing clients to work with complex tree structures without needing to differentiate between individual objects and their compositions.
+컴포지트 패턴은 객체를 트리 구조로 구성하여 부분-전체 계층을 표현하는 구조적 디자인 패턴입니다. 이 패턴을 사용하면 클라이언트가 개별 객체와 객체의 합성을 균일하게 처리할 수 있습니다.
 
-## Example Code
+## 사용
+
+컴포지트 패턴은 개별 객체와 객체의 합성을 동일하게 취급해야 하는 객체 계층 구조를 표현하고자 할 때 특히 유용합니다. 이 패턴은 클라이언트가 개별 객체와 그 합성을 구분할 필요 없이 복잡한 트리 구조를 다룰 수 있게 함으로써 클라이언트 코드를 단순화합니다.
+
+## 예제 코드
+
 ```javascript
-// Component
-class Component {
-    operation() {
-        throw new Error("This method should be overridden.");
-    }
+// 컴포넌트
+class 컴포넌트 {
+  동작() {
+    throw new Error('이 메서드는 오버라이드되어야 합니다.');
+  }
 }
 
-// Leaf
-class Leaf extends Component {
-    constructor(name) {
-        super();
-        this.name = name;
-    }
+// 잎
+class 잎 extends 컴포넌트 {
+  constructor(이름) {
+    super();
+    this.이름 = 이름;
+  }
 
-    operation() {
-        return `Leaf: ${this.name}`;
-    }
+  동작() {
+    return `잎: ${this.이름}`;
+  }
 }
 
-// Composite
-class Composite extends Component {
-    constructor() {
-        super();
-        this.children = [];
-    }
+// 복합체
+class 복합체 extends 컴포넌트 {
+  constructor() {
+    super();
+    this.자식들 = [];
+  }
 
-    add(component) {
-        this.children.push(component);
-    }
+  추가(컴포넌트) {
+    this.자식들.push(컴포넌트);
+  }
 
-    remove(component) {
-        const index = this.children.indexOf(component);
-        if (index !== -1) {
-            this.children.splice(index, 1);
-        }
+  제거(컴포넌트) {
+    const 인덱스 = this.자식들.indexOf(컴포넌트);
+    if (인덱스 !== -1) {
+      this.자식들.splice(인덱스, 1);
     }
+  }
 
-    operation() {
-        return `Composite: [${this.children.map(child => child.operation()).join(', ')}]`;
-    }
+  동작() {
+    return `복합체: [${this.자식들.map((자식) => 자식.동작()).join(', ')}]`;
+  }
 }
 
-// Client code
-const leaf1 = new Leaf("Leaf 1");
-const leaf2 = new Leaf("Leaf 2");
-const composite = new Composite();
-composite.add(leaf1);
-composite.add(leaf2);
+// 클라이언트 코드
+const 잎1 = new 잎('잎 1');
+const 잎2 = new 잎('잎 2');
+const 복합체1 = new 복합체();
+복합체1.추가(잎1);
+복합체1.추가(잎2);
 
-console.log(composite.operation()); // Composite: [Leaf: Leaf 1, Leaf: Leaf 2]
+console.log(복합체1.동작()); // 복합체: [잎: 잎 1, 잎: 잎 2]
 ```
 
-## Conclusion
-The Composite pattern is a powerful way to manage complex tree structures in your applications. By using this pattern, you can simplify your code and make it easier to manage both individual objects and groups of objects.
+## 결론
+
+컴포지트 패턴은 애플리케이션에서 복잡한 트리 구조를 관리하는 강력한 방법입니다. 이 패턴을 사용하면 개별 객체와 객체 그룹을 모두 쉽게 관리할 수 있도록 코드를 단순화할 수 있습니다.

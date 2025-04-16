@@ -1,76 +1,76 @@
-# Memento Pattern
+# 메멘토 패턴
 
-The Memento pattern is a behavioral design pattern that allows an object to capture its internal state and save it externally, so that it can be restored later without violating encapsulation. This is particularly useful for implementing features like undo/redo functionality in applications.
+메멘토 패턴은 객체가 자신의 내부 상태를 캡처하여 외부에 저장할 수 있게 하여 캡슐화를 위반하지 않으면서 나중에 복원할 수 있도록 하는 행동 디자인 패턴입니다. 이는 애플리케이션에서 실행 취소/다시 실행 기능과 같은 기능을 구현하는 데 특히 유용합니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Memento pattern is to provide a way to restore an object to its previous state without exposing its internal structure. It allows for the preservation of an object's state at a specific point in time.
+메멘토 패턴의 주요 목적은 내부 구조를 노출하지 않고 객체를 이전 상태로 복원하는 방법을 제공하는 것입니다. 이를 통해 특정 시점의 객체 상태를 보존할 수 있습니다.
 
-## Usage
+## 사용
 
-The Memento pattern is commonly used in scenarios where you need to implement undo functionality, version control, or any situation where you need to keep track of an object's state over time.
+메멘토 패턴은 실행 취소 기능, 버전 관리 또는 시간이 지남에 따라 객체의 상태를 추적해야 하는 모든 상황에서 일반적으로 사용됩니다.
 
-## Example Code
+## 예제 코드
 
 ```javascript
-// Memento class
-class Memento {
-    constructor(state) {
-        this.state = state;
-    }
+// 메멘토 클래스
+class 메멘토 {
+  constructor(상태) {
+    this.상태 = 상태;
+  }
 }
 
-// Originator class
-class Originator {
-    constructor() {
-        this.state = '';
-    }
+// 원조자 클래스
+class 원조자 {
+  constructor() {
+    this.상태 = '';
+  }
 
-    setState(state) {
-        this.state = state;
-        console.log(`State set to: ${this.state}`);
-    }
+  상태설정(상태) {
+    this.상태 = 상태;
+    console.log(`상태가 설정됨: ${this.상태}`);
+  }
 
-    saveStateToMemento() {
-        return new Memento(this.state);
-    }
+  메멘토에상태저장() {
+    return new 메멘토(this.상태);
+  }
 
-    getStateFromMemento(memento) {
-        this.state = memento.state;
-        console.log(`State restored to: ${this.state}`);
-    }
+  메멘토에서상태가져오기(메멘토) {
+    this.상태 = 메멘토.상태;
+    console.log(`상태가 복원됨: ${this.상태}`);
+  }
 }
 
-// Caretaker class
-class Caretaker {
-    constructor() {
-        this.mementos = [];
-    }
+// 관리자 클래스
+class 관리자 {
+  constructor() {
+    this.메멘토목록 = [];
+  }
 
-    add(memento) {
-        this.mementos.push(memento);
-    }
+  추가(메멘토) {
+    this.메멘토목록.push(메멘토);
+  }
 
-    get(index) {
-        return this.mementos[index];
-    }
+  가져오기(인덱스) {
+    return this.메멘토목록[인덱스];
+  }
 }
 
-// Example usage
-const originator = new Originator();
-const caretaker = new Caretaker();
+// 사용 예시
+const 원조자객체 = new 원조자();
+const 관리자객체 = new 관리자();
 
-originator.setState('State 1');
-caretaker.add(originator.saveStateToMemento());
+원조자객체.상태설정('상태 1');
+관리자객체.추가(원조자객체.메멘토에상태저장());
 
-originator.setState('State 2');
-caretaker.add(originator.saveStateToMemento());
+원조자객체.상태설정('상태 2');
+관리자객체.추가(원조자객체.메멘토에상태저장());
 
-originator.setState('State 3');
-console.log('Current State:', originator.state);
+원조자객체.상태설정('상태 3');
+console.log('현재 상태:', 원조자객체.상태);
 
-// Restore to previous state
-originator.getStateFromMemento(caretaker.get(1));
+// 이전 상태로 복원
+원조자객체.메멘토에서상태가져오기(관리자객체.가져오기(1));
 ```
 
-In this example, the `Originator` class is responsible for creating and restoring its state using the `Memento` class. The `Caretaker` class manages the mementos and allows the originator to save and restore its state.
+이 예제에서 `원조자` 클래스는 `메멘토` 클래스를 사용하여 자신의 상태를 생성하고 복원하는 역할을 합니다. `관리자` 클래스는 메멘토들을 관리하며 원조자가 상태를 저장하고 복원할 수 있도록 합니다.

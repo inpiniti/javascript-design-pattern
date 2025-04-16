@@ -1,59 +1,59 @@
-# Template Method Pattern
+# 템플릿 메소드 패턴
 
-The Template Method pattern defines the skeleton of an algorithm in a method, deferring some steps to subclasses. This pattern lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+템플릿 메소드 패턴은 메소드에서 알고리즘의 뼈대를 정의하고, 일부 단계를 서브클래스로 미루는 행동 디자인 패턴입니다. 이 패턴은 서브클래스가 알고리즘의 구조를 변경하지 않고도 특정 단계를 재정의할 수 있게 합니다.
 
-## Purpose
+## 목적
 
-The Template Method pattern is used to define a framework for an algorithm, allowing subclasses to provide specific implementations for certain steps. This promotes code reuse and helps to adhere to the DRY (Don't Repeat Yourself) principle.
+템플릿 메소드 패턴은 알고리즘의 프레임워크를 정의하여 서브클래스가 특정 단계에 대한 구체적인 구현을 제공할 수 있도록 하는 데 사용됩니다. 이는 코드 재사용을 촉진하고 DRY(Don't Repeat Yourself) 원칙을 준수하는 데 도움이 됩니다.
 
-## Usage
+## 사용
 
-1. **Define the Template Method**: Create a method that outlines the steps of the algorithm.
-2. **Implement Steps in Subclasses**: Subclasses can override specific steps of the algorithm without changing its overall structure.
+1. **템플릿 메소드 정의**: 알고리즘의 단계를 개략적으로 설명하는 메소드를 생성합니다.
+2. **서브클래스에서 단계 구현**: 서브클래스는 알고리즘의 전체 구조를 변경하지 않고 특정 단계를 재정의할 수 있습니다.
 
-## Example Code
+## 예제 코드
 
 ```javascript
 // template-method.js
 
-class AbstractClass {
-    templateMethod() {
-        this.stepOne();
-        this.stepTwo();
-        this.stepThree();
-    }
+class 추상클래스 {
+  템플릿메소드() {
+    this.단계1();
+    this.단계2();
+    this.단계3();
+  }
 
-    stepOne() {
-        console.log('Step One: Default Implementation');
-    }
+  단계1() {
+    console.log('단계 1: 기본 구현');
+  }
 
-    stepTwo() {
-        console.log('Step Two: Default Implementation');
-    }
+  단계2() {
+    console.log('단계 2: 기본 구현');
+  }
 
-    stepThree() {
-        console.log('Step Three: Default Implementation');
-    }
+  단계3() {
+    console.log('단계 3: 기본 구현');
+  }
 }
 
-class ConcreteClassA extends AbstractClass {
-    stepOne() {
-        console.log('ConcreteClassA: Step One Implementation');
-    }
+class 구체클래스A extends 추상클래스 {
+  단계1() {
+    console.log('구체클래스A: 단계 1 구현');
+  }
 }
 
-class ConcreteClassB extends AbstractClass {
-    stepThree() {
-        console.log('ConcreteClassB: Step Three Implementation');
-    }
+class 구체클래스B extends 추상클래스 {
+  단계3() {
+    console.log('구체클래스B: 단계 3 구현');
+  }
 }
 
-// Usage
-const instanceA = new ConcreteClassA();
-instanceA.templateMethod();
+// 사용 예시
+const 인스턴스A = new 구체클래스A();
+인스턴스A.템플릿메소드();
 
-const instanceB = new ConcreteClassB();
-instanceB.templateMethod();
+const 인스턴스B = new 구체클래스B();
+인스턴스B.템플릿메소드();
 ```
 
-In this example, `AbstractClass` defines the template method `templateMethod`, which calls the steps of the algorithm. `ConcreteClassA` and `ConcreteClassB` provide specific implementations for some of the steps, demonstrating how the Template Method pattern allows for flexibility while maintaining a consistent algorithm structure.
+이 예제에서 `추상클래스`는 알고리즘의 단계를 호출하는 `템플릿메소드`를 정의합니다. `구체클래스A`와 `구체클래스B`는 일부 단계에 대한 구체적인 구현을 제공하여, 템플릿 메소드 패턴이 일관된 알고리즘 구조를 유지하면서도 유연성을 제공하는 방법을 보여줍니다.

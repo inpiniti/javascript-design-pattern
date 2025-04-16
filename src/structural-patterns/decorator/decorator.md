@@ -1,42 +1,60 @@
-# Decorator Pattern
+# 데코레이터 패턴
 
-The Decorator pattern is a structural design pattern that allows behavior to be added to individual objects dynamically. This pattern is typically used to extend the functionalities of classes in a flexible and reusable way.
+데코레이터 패턴은 객체에 동적으로 행동을 추가할 수 있게 해주는 구조적 디자인 패턴입니다. 이 패턴은 일반적으로 유연하고 재사용 가능한 방식으로 클래스의 기능을 확장하는 데 사용됩니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Decorator pattern is to provide a way to add new functionality to an object without altering its structure. This is achieved by creating a set of decorator classes that are used to wrap concrete components.
+데코레이터 패턴의 주요 목적은 객체의 구조를 변경하지 않고도 새로운 기능을 추가할 수 있는 방법을 제공하는 것입니다. 이는 구체적인 구성 요소를 감싸는 데 사용되는 일련의 데코레이터 클래스를 만들어 달성됩니다.
 
-## Usage
+## 사용
 
-The Decorator pattern is useful when you want to add responsibilities to individual objects, rather than to an entire class. It provides a flexible alternative to subclassing for extending functionality.
+데코레이터 패턴은 클래스 전체가 아닌 개별 객체에 책임을 추가하고자 할 때 유용합니다. 이는 기능을 확장하기 위해 서브클래싱의 유연한 대안을 제공합니다.
 
-## Example Code
+## 예제 코드
 
-```javascript
-// Base component
-class Coffee {
-    cost() {
+````javascript
+// 기본 구성 요소
+class 커피 {
+    가격() {
         return 5;
     }
 }
 
-// Decorator
-class MilkDecorator {
-    constructor(coffee) {
-        this.coffee = coffee;
+// 데코레이터
+class 우유데코레이터 {
+    constructor(커피) {
+        this.커피 = 커피;
     }
 
-    cost() {
-        return this.coffee.cost() + 1;
+    가격() {
+        return# 데코레이터 패턴
+
+데코레이터 패턴은 객체에 동적으로 행동을 추가할 수 있게 해주는 구조적 디자인 패턴입니다. 이 패턴은 일반적으로 유연하고 재사용 가능한 방식으로 클래스의 기능을 확장하는 데 사용됩니다.
+
+## 목적
+
+데코레이터 패턴의 주요 목적은 객체의 구조를 변경하지 않고도 새로운 기능을 추가할 수 있는 방법을 제공하는 것입니다. 이는 구체적인 구성 요소를 감싸는 데 사용되는 일련의 데코레이터 클래스를 만들어 달성됩니다.
+
+## 사용
+
+데코레이터 패턴은 클래스 전체가 아닌 개별 객체에 책임을 추가하고자 할 때 유용합니다. 이는 기능을 확장하기 위해 서브클래싱의 유연한 대안을 제공합니다.
+
+## 예제 코드
+
+```javascript
+// 기본 구성 요소
+class 커피 {
+    가격() {
+        return 5;
     }
 }
 
-// Usage
-let myCoffee = new Coffee();
-console.log(myCoffee.cost()); // 5
+// 데코레이터
+class 우유데코레이터 {
+    constructor(커피) {
+        this.커피 = 커피;
+    }
 
-myCoffee = new MilkDecorator(myCoffee);
-console.log(myCoffee.cost()); // 6
-```
-
-In this example, we have a `Coffee` class that has a cost method. We then create a `MilkDecorator` that adds the cost of milk to the coffee. This allows us to dynamically add functionality to our coffee object without modifying the original class.
+    가격() {
+        return
+````

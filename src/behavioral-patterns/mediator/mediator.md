@@ -1,67 +1,67 @@
-# Mediator Pattern
+# 미디에이터 패턴
 
-The Mediator pattern is a behavioral design pattern that encapsulates how a set of objects interact. It promotes loose coupling by preventing objects from referring to each other explicitly, allowing for easier maintenance and scalability.
+미디에이터 패턴은 객체들이 상호작용하는 방식을 캡슐화하는 행동 디자인 패턴입니다. 이 패턴은 객체들이 서로를 명시적으로 참조하는 것을 방지함으로써 느슨한 결합을 촉진하여 유지보수와 확장성을 더 쉽게 합니다.
 
-## Purpose
+## 목적
 
-The primary purpose of the Mediator pattern is to reduce the complexity of communication between multiple objects or components. Instead of having objects communicate directly with each other, they communicate through a mediator object, which handles the interactions.
+미디에이터 패턴의 주요 목적은 여러 객체 또는 컴포넌트 간의 통신 복잡성을 줄이는 것입니다. 객체들이 서로 직접 통신하는 대신, 미디에이터 객체를 통해 통신하며, 이 미디에이터가 상호작용을 처리합니다.
 
-## Usage
+## 사용
 
-The Mediator pattern is useful in scenarios where you have a complex set of interactions between multiple objects. By using a mediator, you can simplify the communication process and make the system more manageable.
+미디에이터 패턴은 여러 객체 간의 복잡한 상호작용이 있는 시나리오에서 유용합니다. 미디에이터를 사용함으로써 통신 과정을 단순화하고 시스템을 더 관리하기 쉽게 만들 수 있습니다.
 
-## Example Code
+## 예제 코드
 
 ```javascript
 // mediator.js
 
-class Mediator {
-    constructor() {
-        this.colleagues = [];
-    }
+class 중재자 {
+  constructor() {
+    this.동료들 = [];
+  }
 
-    register(colleague) {
-        this.colleagues.push(colleague);
-        colleague.setMediator(this);
-    }
+  등록(동료) {
+    this.동료들.push(동료);
+    동료.중재자설정(this);
+  }
 
-    send(message, sender) {
-        for (const colleague of this.colleagues) {
-            if (colleague !== sender) {
-                colleague.receive(message);
-            }
-        }
+  전송(메시지, 발신자) {
+    for (const 동료 of this.동료들) {
+      if (동료 !== 발신자) {
+        동료.수신(메시지);
+      }
     }
+  }
 }
 
-class Colleague {
-    constructor(name) {
-        this.name = name;
-    }
+class 동료 {
+  constructor(이름) {
+    this.이름 = 이름;
+  }
 
-    setMediator(mediator) {
-        this.mediator = mediator;
-    }
+  중재자설정(중재자) {
+    this.중재자 = 중재자;
+  }
 
-    send(message) {
-        console.log(`${this.name} sends: ${message}`);
-        this.mediator.send(message, this);
-    }
+  전송(메시지) {
+    console.log(`${this.이름}이(가) 전송: ${메시지}`);
+    this.중재자.전송(메시지, this);
+  }
 
-    receive(message) {
-        console.log(`${this.name} receives: ${message}`);
-    }
+  수신(메시지) {
+    console.log(`${this.이름}이(가) 수신: ${메시지}`);
+  }
 }
 
-// Usage
-const mediator = new Mediator();
-const colleague1 = new Colleague('Colleague 1');
-const colleague2 = new Colleague('Colleague 2');
+// 사용 예시
+const 중재자 = new 중재자();
+const 동료1 = new 동료('동료 1');
+const 동료2 = new 동료('동료 2');
 
-mediator.register(colleague1);
-mediator.register(colleague2);
+중재자.등록(동료1);
+중재자.등록(동료2);
 
-colleague1.send('Hello, Colleague 2!');
+동료1.전송('안녕, 동료 2!');
 ```
 
-In this example, the `Mediator` class manages the communication between `Colleague` objects. When one colleague sends a message, the mediator forwards it to all other colleagues, promoting loose coupling and simplifying interactions.
+이 예제에서 `중재자` 클래스는 `동료` 객체 간의 통신을 관리합니다. 한 동료가 메시지를 보내면 중재자는 이를 다른 모든 동료에게 전달하여 느슨한 결합을 촉진하고 상호작용을 단순화합니다.

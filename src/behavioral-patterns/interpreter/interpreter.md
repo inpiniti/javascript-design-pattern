@@ -1,50 +1,53 @@
-# Interpreter Pattern
+# 인터프리터 패턴
 
-## Purpose
-The Interpreter pattern is a behavioral design pattern that defines a representation for a language's grammar along with an interpreter that uses the representation to interpret sentences in the language. This pattern is particularly useful for designing a language or a domain-specific language (DSL).
+## 목적
 
-## Usage
-The Interpreter pattern is used when you have a language that needs to be interpreted, and you want to define a grammar for that language. It allows you to create a structure that can interpret sentences based on the defined grammar.
+인터프리터 패턴은 언어의 문법에 대한 표현과 함께 그 표현을 사용하여 해당 언어의 문장을 해석하는 인터프리터를 정의하는 행동 디자인 패턴입니다. 이 패턴은 언어나 도메인 특화 언어(DSL)를 설계할 때 특히 유용합니다.
 
-## Example Code
+## 사용
+
+인터프리터 패턴은 해석해야 할 언어가 있고 해당 언어에 대한 문법을 정의하고자 할 때 사용됩니다. 이를 통해 정의된 문법에 기반하여 문장을 해석할 수 있는 구조를 만들 수 있습니다.
+
+## 예제 코드
+
 ```javascript
-// Abstract expression
-class Expression {
-    interpret(context) {}
+// 추상 표현식
+class 표현식 {
+  해석(컨텍스트) {}
 }
 
-// Terminal expression
-class TerminalExpression extends Expression {
-    constructor(data) {
-        super();
-        this.data = data;
-    }
+// 종단 표현식
+class 종단표현식 extends 표현식 {
+  constructor(데이터) {
+    super();
+    this.데이터 = 데이터;
+  }
 
-    interpret(context) {
-        return context.includes(this.data);
-    }
+  해석(컨텍스트) {
+    return 컨텍스트.includes(this.데이터);
+  }
 }
 
-// Non-terminal expression
-class AndExpression extends Expression {
-    constructor(expr1, expr2) {
-        super();
-        this.expr1 = expr1;
-        this.expr2 = expr2;
-    }
+// 비종단 표현식
+class 그리고표현식 extends 표현식 {
+  constructor(표현식1, 표현식2) {
+    super();
+    this.표현식1 = 표현식1;
+    this.표현식2 = 표현식2;
+  }
 
-    interpret(context) {
-        return this.expr1.interpret(context) && this.expr2.interpret(context);
-    }
+  해석(컨텍스트) {
+    return this.표현식1.해석(컨텍스트) && this.표현식2.해석(컨텍스트);
+  }
 }
 
-// Client code
-const context = ['red', 'green', 'blue'];
-const red = new TerminalExpression('red');
-const green = new TerminalExpression('green');
-const redAndGreen = new AndExpression(red, green);
+// 클라이언트 코드
+const 컨텍스트 = ['빨강', '초록', '파랑'];
+const 빨강 = new 종단표현식('빨강');
+const 초록 = new 종단표현식('초록');
+const 빨강그리고초록 = new 그리고표현식(빨강, 초록);
 
-console.log(redAndGreen.interpret(context)); // true
+console.log(빨강그리고초록.해석(컨텍스트)); // true
 ```
 
-In this example, we define an abstract `Expression` class and two concrete classes: `TerminalExpression` and `AndExpression`. The `TerminalExpression` checks if a specific value exists in the context, while the `AndExpression` combines two expressions to check if both are true. The client code demonstrates how to use these expressions to interpret a context.
+이 예제에서는 추상 `표현식` 클래스와 두 개의 구체적인 클래스인 `종단표현식`과 `그리고표현식`을 정의합니다. `종단표현식`은 특정 값이 컨텍스트에 존재하는지 확인하고, `그리고표현식`은 두 표현식을 결합하여 둘 다 참인지 확인합니다. 클라이언트 코드는 이러한 표현식을 사용하여 컨텍스트를 해석하는 방법을 보여줍니다.

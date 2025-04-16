@@ -1,63 +1,63 @@
-# Strategy Pattern
+# 스트래티지 패턴
 
-The Strategy pattern is a behavioral design pattern that enables selecting an algorithm's behavior at runtime. It defines a family of algorithms, encapsulates each one, and makes them interchangeable. This pattern allows the algorithm to vary independently from clients that use it.
+스트래티지 패턴은 런타임에 알고리즘의 동작을 선택할 수 있게 하는 행동 디자인 패턴입니다. 이 패턴은 알고리즘 집합을 정의하고, 각각을 캡슐화하여 서로 교체 가능하게 만듭니다. 이를 통해 알고리즘이 이를 사용하는 클라이언트와 독립적으로 변경될 수 있습니다.
 
-## Purpose
+## 목적
 
-The main purpose of the Strategy pattern is to enable a client to choose an algorithm from a family of algorithms at runtime. This promotes the Open/Closed Principle, allowing new strategies to be added without modifying existing code.
+스트래티지 패턴의 주요 목적은 클라이언트가 런타임에 알고리즘 집합 중에서 선택할 수 있도록 하는 것입니다. 이는 개방/폐쇄 원칙을 촉진하여 기존 코드를 수정하지 않고도 새로운 전략을 추가할 수 있게 합니다.
 
-## Usage
+## 사용
 
-The Strategy pattern is useful when:
+스트래티지 패턴은 다음과 같은 경우에 유용합니다:
 
-- You have multiple algorithms for a specific task and want to switch between them dynamically.
-- You want to avoid using conditional statements to select an algorithm.
-- You want to encapsulate algorithms in separate classes, making them easier to manage and extend.
+- 특정 작업에 대한 여러 알고리즘이 있고 이들을 동적으로 전환하고 싶을 때
+- 알고리즘을 선택하기 위해 조건문을 사용하는 것을 피하고 싶을 때
+- 알고리즘을 별도의 클래스로 캡슐화하여 더 쉽게 관리하고 확장하고 싶을 때
 
-## Example Code
+## 예제 코드
 
 ```javascript
-// Strategy Interface
-class Strategy {
-    execute(a, b) {
-        throw new Error("This method should be overridden!");
-    }
+// 전략 인터페이스
+class 전략 {
+  실행(a, b) {
+    throw new Error('이 메서드는 오버라이드되어야 합니다!');
+  }
 }
 
-// Concrete Strategies
-class ConcreteStrategyAdd extends Strategy {
-    execute(a, b) {
-        return a + b;
-    }
+// 구체적 전략들
+class 더하기전략 extends 전략 {
+  실행(a, b) {
+    return a + b;
+  }
 }
 
-class ConcreteStrategySubtract extends Strategy {
-    execute(a, b) {
-        return a - b;
-    }
+class 빼기전략 extends 전략 {
+  실행(a, b) {
+    return a - b;
+  }
 }
 
-// Context
-class Context {
-    constructor(strategy) {
-        this.strategy = strategy;
-    }
+// 컨텍스트
+class 컨텍스트 {
+  constructor(전략) {
+    this.전략 = 전략;
+  }
 
-    setStrategy(strategy) {
-        this.strategy = strategy;
-    }
+  전략설정(전략) {
+    this.전략 = 전략;
+  }
 
-    executeStrategy(a, b) {
-        return this.strategy.execute(a, b);
-    }
+  전략실행(a, b) {
+    return this.전략.실행(a, b);
+  }
 }
 
-// Client Code
-const context = new Context(new ConcreteStrategyAdd());
-console.log(context.executeStrategy(5, 3)); // Output: 8
+// 클라이언트 코드
+const 컨텍스트 = new 컨텍스트(new 더하기전략());
+console.log(컨텍스트.전략실행(5, 3)); // 출력: 8
 
-context.setStrategy(new ConcreteStrategySubtract());
-console.log(context.executeStrategy(5, 3)); // Output: 2
+컨텍스트.전략설정(new 빼기전략());
+console.log(컨텍스트.전략실행(5, 3)); // 출력: 2
 ```
 
-In this example, the `Context` class uses a `Strategy` to perform operations. The client can switch between different strategies (`ConcreteStrategyAdd` and `ConcreteStrategySubtract`) at runtime, demonstrating the flexibility of the Strategy pattern.
+이 예제에서 `컨텍스트` 클래스는 작업을 수행하기 위해 `전략`을 사용합니다. 클라이언트는 런타임에 다른 전략(`더하기전략`과 `빼기전략`) 사이를 전환할 수 있어 스트래티지 패턴의 유연성을 보여줍니다.
